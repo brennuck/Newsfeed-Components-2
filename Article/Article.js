@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Kayla",
+    date: 'December 4th, 2021',
+    firstParagraph: 'YES',
+    secondParagraph: "YES YES",
+    thirdParagraph: "YES YES YES YES YES"
   }
 ];
 
@@ -112,3 +119,46 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+  // create new elements
+  const article = document.createElement("div");
+  const name = document.createElement("h2");
+  const time = document.createElement("p");
+  const paragraph1 = document.createElement("p");
+  const paragraph2 = document.createElement("p");
+  const paragraph3 = document.createElement("p");
+  const buttonContent = document.createElement("span");
+
+  // setup the structure of our elements
+  article.append(name);
+  article.append(time);
+  article.append(paragraph1);
+  article.append(paragraph2);
+  article.append(paragraph3);
+  article.append(buttonContent);
+
+  // add classes to elements
+  article.classList.add("article");
+  time.classList.add("date");
+  buttonContent.classList.add("expandButton");
+
+  // set text context
+  name.textContent = title;
+  time.textContent = date;
+  paragraph1.textContent = firstParagraph;
+  paragraph2.textContent = secondParagraph;
+  paragraph3.textContent = thirdParagraph;
+  buttonContent.textContent = '\u25bc'
+
+  article.addEventListener('click', event => {
+    article.classList.toggle('article-open');
+  });
+  return article;
+}
+
+const body = document.querySelector('body');
+
+data.forEach(data => {
+  body.append(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+})
